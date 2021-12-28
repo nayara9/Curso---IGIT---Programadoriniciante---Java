@@ -1,0 +1,100 @@
+package Pacote20211221;
+
+import java.util.Scanner;
+
+public class Classe20211221 {
+
+	public static void main(String[] args) {
+		/* Criar um programa que:
+		 * a) Receba nomes, idades e situações de pessoas;
+		 * b) Não permita nomes vazios, idades negativas e situações diferentes de 
+		 *    A, I e E;
+		 * Ao final, exibir:
+		 * i) Todos os dados das pessoas;
+		 * ii) A maior idade encontrada;
+		 * iii) A quantidade de pessoas em cada uma das situações;   
+		 * Entrada: nome, idade e situação de uma pessoa;
+		 * Processamento: validação de nome, idade e situação; 
+		 *                caldulo da maior idade. Qtde de pessoas em cada situação;
+		 * Saída: Exibição de nome, idade e situação;
+		 *        Exibição da maior idade;
+		 *        Exibição da quantidade de pessoas em cada situação;		 
+		 */		 
+		 Scanner entCaractere = new Scanner(System.in);
+		 Scanner entNumero = new Scanner(System.in);
+	     String[] nomes = new String[50]; 	  
+		 int[] idades = new int[50];
+		 char[] situacoes = new char[50];
+	     char continuar = 'S';
+		 int nPessoas = 0;
+		 int maiorIdade = 0;
+		 int[] contadorSituacoes = new int[3];
+	     
+	     while ( continuar == 'S' || continuar == 's' ) {	    	 
+	    	 System.out.printf("Digite o nome da %dº pessoa: ", nPessoas + 1);
+	    	 nomes[nPessoas] = entCaractere.nextLine();
+	    	 
+	    	 while (nomes[nPessoas].equals("")) {
+	    		System.out.printf("O nome não pode ser vazio. Informe o nome da %d pessoa: ", nPessoas+1); 
+	    		nomes[nPessoas] = entCaractere.nextLine(); 
+	    	 }
+	    	 
+	    	 System.out.printf("Digite a idade da %dº pessoa: ", nPessoas + 1);
+	    	 idades[nPessoas] = entNumero.nextInt(); 
+	    	 
+	    	 while (idades[nPessoas] < 0) {
+	    		System.out.printf("Idade deve ser maior que ou igual a zero. Digite a idade da %dº "
+	    				+ "pessoa: ", nPessoas + 1);
+		    	idades[nPessoas] = entNumero.nextInt();	    		 	    		 
+	    	 }
+	    	 
+	    	 if (idades[nPessoas] > maiorIdade)
+	    		maiorIdade = idades[nPessoas];  
+	    	 
+	    	 System.out.printf("Digite a situação da %dº pessoa (A - Ativo; I - Inativo;"
+	    	 		+ " E - Excluído) ", nPessoas + 1);
+	    	 situacoes[nPessoas] = entCaractere.nextLine().charAt(0);
+	    	 
+	    	 while (situacoes[nPessoas] != 'A' && situacoes[nPessoas] != 'a' &&
+      			    situacoes[nPessoas] != 'I' && situacoes[nPessoas] != 'i' &&
+      			    situacoes[nPessoas] != 'E' && situacoes[nPessoas] != 'e') {
+	    		 System.out.printf("Situação inválida. "
+	    		 		+ "Digite a situação da %dº pessoa (A - Ativo; I - Inativo;"
+	 	    	 		+ " E - Excluído) ", nPessoas + 1);
+	 	    	 situacoes[nPessoas] = entCaractere.nextLine().charAt(0); 	    	 	 	    		 	    		 
+	    	 }
+	    	 
+	    	 if (situacoes[nPessoas] == 'A' || situacoes[nPessoas] == 'a') {
+	    		contadorSituacoes[0] = contadorSituacoes[0] + 1;
+	    	 }
+	    	 else if (situacoes[nPessoas] == 'I' || situacoes[nPessoas] == 'i') {
+	    	    contadorSituacoes[1]++; 
+	    	 }
+	    	 else {
+	    		contadorSituacoes[2] += 1;
+	    	 }
+	    	 
+	    	 System.out.println("Deseja continuar? (S - Sim; N - Não");
+	    	 continuar = entCaractere.nextLine().charAt(0);
+	    	 
+	    	 while (continuar != 'S' && continuar != 's' && 
+	    		    continuar != 'N' && continuar != 'n') {
+	    		 System.out.println("Opção Inválida. Deseja continuar? (S - Sim; N - Não");
+		    	 continuar = entCaractere.nextLine().charAt(0); 		    		    	
+	    	 }
+	    	 nPessoas = nPessoas + 1;	    	 
+	     } // Fim do while principal  
+	     
+	     System.out.println("******* Exibindo as saídas *******");
+	     
+	     for (int i = 0; i < nPessoas; i++) {
+	    	System.out.printf("Nome: %s. Idade: %d. Situação: %c.\n",nomes[i], idades[i], situacoes[i]); 
+	     }
+	      
+	     System.out.printf("A maior idade encontrada é: %d.\n", maiorIdade);
+	     
+	     System.out.printf("Totalizador de Situações: Ativos(%d), Inativos(%d), Excluídos(%d)\n", 
+	    		 contadorSituacoes[0], contadorSituacoes[1], contadorSituacoes[2]);
+	}
+
+}
